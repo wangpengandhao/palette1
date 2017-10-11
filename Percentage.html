@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	canvas{
+		border: 1px solid #333;
+	}
+</style>
+<body>
+	<canvas width="300" height="300"></canvas>
+</body>
+<script>
+	window.onload=function(){
+		let number=document.querySelector('.num');
+		let ring=document.querySelector('canvas');
+		let ctx=ring.getContext("2d");
+		let deg=Math.PI*2
+		let speed=1;
+		let t=requestAnimationFrame(fn);
+		function fn(){
+			if(speed>=85){
+				cancelAnimationFrame(t);
+			}else{
+				t=requestAnimationFrame(fn);
+			}
+			ctx.clearRect(0, 0, 300, 300);
+			ctx.beginPath();
+			ctx.arc(150, 150, 100, -Math.PI/2, (deg*speed)/100-Math.PI/2);
+			ctx.lineWidth=10;
+			ctx.strokeStyle='skyblue';
+			ctx.lineCap='round';			
+			ctx.stroke();
+			ctx.lineWidth=1;
+			ctx.font='40px sans-serif';
+			ctx.strokeText(`${speed}%`, 150, 150);
+			ctx.textAlign='center';
+			ctx.textBaseLine='middle';			
+			speed++;			
+			console.log(speed)
+		}	
+	}
+</script>
+</html>
